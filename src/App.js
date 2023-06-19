@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+ 
+ 
+const App = () => {
+    let currDate=new Date();
+    const currHour=currDate.getHours();
+    let greeting="";
+    const cssStyle={};
+    if(currHour>=1 && currHour<12){
+    greeting="Good Morning";
+    cssStyle.color="green";
+    }
+    else if(currHour>=12 && currHour<19){
+    greeting="Good Afternoon";
+    cssStyle.color="Orange";
+    }
+    else{
+    greeting="Good Night";
+    cssStyle.color="Blue";
+    }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
+    let time = new Date().toLocaleTimeString();
+    
+    const [count, setCount] = useState(time);
+    const UpdateTime = () => {
+        time = new Date().toLocaleTimeString();
+        setCount(time);
+    };
+    setInterval(UpdateTime,1000)
+    return(
+        <>
+            <h1 class='heading'>Digital Clock</h1>
+            <h1> 
+            <span style={cssStyle}>{greeting} </span>
+            {count}</h1>
+           
+        </> 
+    );
+};    
 export default App;
+
